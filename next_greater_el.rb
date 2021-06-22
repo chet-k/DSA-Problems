@@ -1,3 +1,4 @@
+require 'byebug'
 """
 NEXT GREATER ELEMENT I
 The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.
@@ -108,4 +109,54 @@ def next_greater_element_ii(nums)
     end
     
     ans
+end
+
+"""
+NEXT GREATER ELEMENT III:
+Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.
+
+Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.
+
+ 
+
+Example 1:
+
+Input: n = 12
+Output: 21
+Example 2:
+
+Input: n = 21
+Output: -1
+ 
+
+Constraints:
+
+1 <= n <= 231 - 1
+"""
+
+# @param {Integer} n
+# @return {Integer}
+def next_greater_element(n)
+    nums = n.to_s.split('')
+    i = nums.length - 1
+    
+    # decrement i until at a local peak. 
+    # e.g., while the left-most digits are descending (or equal), we can't
+    # perform any swaps among them that would result in a larger integer.
+    i -=1 until i == 0 || nums[i-1] < nums[i]
+    return -1 if i == 0
+    
+    # start j at i, and increment until nums[j+1] < nums[i-1]
+    # e.g., we want to swap i-1 with the smallest greater digit to the left.
+    j = i
+    j += 1 until j == nums.length - 1 || nums[j+1] <= nums[i-1]
+    nums[i-1], nums[j] = nums[j], nums[i-1]
+    
+    # finally, reverse the digits from i to the end so that they are 
+    # now in ascending order
+    nums[i..-1] = nums[i..-1].reverse
+    
+    ans = nums.join('').to_i
+    
+    ans > 2**31 - 1 ? -1 : ans
 end
