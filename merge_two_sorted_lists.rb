@@ -8,6 +8,23 @@ end
 
 class Solution
 
+    def later_attempt(l1, l2)
+        dummy = ListNode.new
+        merge = dummy
+        until l1.nil? || l2.nil?
+            if l1.val <= l2.val
+                merge.next = l1
+                l1 = l1.next
+            else
+                merge.next = l2
+                l2 = l2.next
+            end
+            merge = merge.next
+        end
+        merge.next = l1.nil? ? l2 : l1
+        dummy.next
+    end
+
     def better_merge_two_lists(l1, l2)
         node = ListNode.new()
         root = node
