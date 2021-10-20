@@ -5,7 +5,7 @@ https://leetcode.com/submissions/detail/573404878/
 
 Didn't realize this was rated LC-hard. IMO, one of the very few that is 
 actually over-rated. The algo is easy, it's the tricks of implementation that 
-can be a little tricky.
+can be a little tricky therefore just difficult to complete in a short time.
 =end
 
 # @param {Integer} num -> 32-bit integer required
